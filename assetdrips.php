@@ -37,13 +37,13 @@ if ( is_readable( $assetdrips_autoload ) ) {
 	require $assetdrips_autoload;
 } else {
 	spl_autoload_register(
-		static function ( string $class ): void {
+		static function ( string $class_name ): void {
 			$prefix = 'AssetDrips\\';
 			$len    = strlen( $prefix );
-			if ( strncmp( $class, $prefix, $len ) !== 0 ) {
+			if ( strncmp( $class_name, $prefix, $len ) !== 0 ) {
 				return;
 			}
-			$relative = str_replace( '\\', '/', substr( $class, $len ) );
+			$relative = str_replace( '\\', '/', substr( $class_name, $len ) );
 			$file     = __DIR__ . '/src/' . $relative . '.php';
 			if ( is_readable( $file ) ) {
 				require $file;
